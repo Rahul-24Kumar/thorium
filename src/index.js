@@ -1,9 +1,12 @@
 const express = require('express');
 var bodyParser = require('body-parser');
 
-const route = require('./routes/route.js');
+const route = require('./logger/route.js');
+// if working on logger folder use ./logger/route.js
+// if working on validator folder use  ./validator/route.js
+// if working on util folder use  ./util/route.js
 
-const app = express();
+const app = express(); 
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
