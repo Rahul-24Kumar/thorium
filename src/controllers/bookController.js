@@ -3,12 +3,95 @@ const BookModel= require("../models/bookModel")
 
 const createBook= async function (req, res) {
     let data= req.body
-
     let savedData= await BookModel.create(data)
     res.send({msg: savedData})
 }
 
 const getBooksData= async function (req, res) {
+    let allBooks = await BookModel.find()
+    res.send({msg: allBooks})
+}
+
+const getBooksLists= async function(req,res) {
+    let page= req.query.page
+    let bookList = await BookModel.find().select({ bookName: 1, authorName: 1, _id:0 })
+    res.send({msg: bookList})
+}
+
+const getBooksInYear= async function(req,res) {
+    let booksYear = await BookModel.find({"year": 2021})
+    res.send({msg: booksYear})
+}
+
+const getParticularBooks= async function(req,res) {
+    let particularBook = await BookModel.find({ bookName:  /^program/i  })
+    res.send({msg: particularBook})
+}
+
+const getXINRBooks= async function(req,res) {
+    let priceOfBooks = await BookModel.find({"prices.indianPrice": {$in: ["INR100", "INR200", "INR500"] } }  )
+    res.send({msg: priceOfBooks})
+}
+
+const getRandomBooks= async function(req,res) {
+    let pagesBook = await BookModel.find({ totalPages: { $gte: 500 }  })
+    res.send({msg: pagesBook})
+}
+
+
+
+
+// const { count } = require("console")
+// const BookModel= require("../models/bookModel")
+
+// const createBook= async function (req, res) {
+//     let data= req.body
+
+//     let savedData= await BookModel.create(data)
+//     res.send({msg: savedData})
+// }
+
+// //today
+
+// const getParticularBooks = async function (req, res) {
+//     let data= req.body
+//     let savedData= await BookModel.find({
+//         $or: [{bookName: "hi".select(bookName)},{year:2020}.select(bookName),select(data)]
+//     })
+//     res.send({msg: savedData})
+// }
+
+// const bookList = async function (req, res) {
+// //.select( { bookName: 1, authorName: 1, _id: 0})
+//     let savedData= await BookModel.find().select({bookName: 1, authorName: 1,})
+//     res.send({msg: savedData})
+// }
+
+// const getBooksInYear = async function (req, res) {
+//     let savedData= await BookModel.find({
+//         bookName: {$in: ["Rama","kama","yama" ]}.select({year: 1999})
+//     })
+//     res.send({msg: savedData})
+
+
+// const getRandomBooks = async function (req, res) {
+//     let page= req.query.page
+//     let pageSize = req.query.pageSize
+//     let savedData= await BookModel.find({
+//         $or: [{stock: true},skip(pageSize * (page-1)).limit(pageSize)]
+//     })
+//     res.send({msg: savedData})
+// }
+// const getXINRBooks = async function (req, res) {
+//     let savedData= await BookModel.find( {
+//         $or: [{prices:"100INR"},{prices:"200INR"}, {prices:"500INR"}]
+//     })
+//     res.send({msg: savedData})
+
+
+//today
+
+// const getBooksData= async function (req, res) {
 
     // let allBooks= await BookModel.find( ).count() // COUNT
 
@@ -16,7 +99,7 @@ const getBooksData= async function (req, res) {
     
     // let allBooks= await BookModel.find( { 
     //     $or: [ {authorName : "Chetan Bhagat" } , { isPublished: true } , {  "year": 1991 }]
-    // } ).select( { bookName: 1, authorName: 1, _id: 0})n // SELECT keys that we want
+    // } ).select( { bookName: 1, authorName: 1, _id: 0}) // SELECT keys that we want
 
     // let allBooks= await BookModel.find().sort( { sales: -1 }) // SORT
 
@@ -65,21 +148,36 @@ const getBooksData= async function (req, res) {
     
     // ASYNC AWAIT
     
-    let a= 2+4
-    a= a + 10
-    console.log(a)
-    let allBooks= await BookModel.find( )  //normally this is an asynchronous call..but await makes it synchronous
+    // let a= 2+4
+    // a= a + 10
+    // console.log(a)
+    // let allBooks= await BookModel.find( )  //normally this is an asynchronous call..but await makes it synchronous
 
 
     // WHEN AWAIT IS USED: - database + axios
     //  AWAIT can not be used inside forEach , map and many of the array functions..BE CAREFUL
-    console.log(allBooks)
-    let b = 14
-    b= b+ 10
-    console.log(b)
-    res.send({msg: allBooks})
-}
+//     console.log(allBooks)
+//     let b = 14
+//     b= b+ 10
+//     console.log(b)
+//     res.send({msg: allBooks})
+// }
 
 
+// module.exports.createBook= createBook
+// module.exports.getBooksData= getBooksData
+
+// //today
+// module.exports.getParticularBooks= getParticularBooks
+// module.exports.getBooksLists = getBooksLists
+// module.exports.getXINRBooks = getXINRBooks
+// module.exports.getRandomBooks = getRandomBooks
+// module.exports.getBooksInYear = getBooksInYear
+//today
 module.exports.createBook= createBook
 module.exports.getBooksData= getBooksData
+module.exports.getBooksLists= getBooksLists
+module.exports.getBooksInYear= getBooksInYear
+module.exports.getParticularBooks=getParticularBooks
+module.exports.getXINRBooks=getXINRBooks
+module.exports.getRandomBooks=getRandomBooks
