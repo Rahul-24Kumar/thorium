@@ -1,13 +1,13 @@
 const mongoose = require('mongoose');
 
-const bookSchema = new mongoose.Schema( {
-    name: String, 
-    author_id: {
-        type: Number, 
-        required: true
-    },
-    prices: Number,
-    ratings: Number,
+const authorSchema = new mongoose.Schema( {
+    author_id:{
+        type : Number,
+        required : true
+    },  
+    author_name: String, 
+    age: Number,
+    address: String,
     
     // " best boook on earth"   [ "Nodejs in detail" , "mongodb in detail", "fronend in detail"] 
     // {
@@ -21,4 +21,4 @@ const bookSchema = new mongoose.Schema( {
 }, { timestamps: true });
 
 
-module.exports = mongoose.model('Book', bookSchema) //users
+module.exports = mongoose.model('Author', authorSchema) //users
