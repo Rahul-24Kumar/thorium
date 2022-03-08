@@ -7,7 +7,7 @@ const createUser = async function (abcd, xyz) {
   //the second parameter is always the response
   let data = abcd.body;
   let savedData = await userModel.create(data);
-  console.log(abcd.newAtribute);
+ // console.log(abcd.newAtribute);
   xyz.send({ msg: savedData });
 };
 
@@ -72,7 +72,16 @@ const updateUser = async function (req, res) {
 // Check if the token present is a valid token
 // Return a different error message in both these cases
 
-  let userId = req.params.userId;
+let token = req.headers["x-Auth-token"];
+if (!token) token = req.headers["x-auth-token"];
+if (!token) return res.send({ status: false, msg: "token must be present" });
+
+  console.log(token);
+
+
+
+
+let userId = req.params.userId;
   let user = await userModel.findById(userId);
   //Return an error if no user with the given id exists in the db
   if (!user) {
@@ -84,7 +93,20 @@ const updateUser = async function (req, res) {
   res.send({ status: updatedUser, data: updatedUser });
 };
 
+
+const deleteUser = async function(req,res) {
+  let userId = req.params.userId;
+  let userss = await userModel.findById(userId);
+  if(!userss) {
+    return res.send("No such user exists");
+  }
+
+  let deleteUser = await userModel.updateMany({ isDeleted: true});
+  res.send({data: deleteUser })
+};
+
 module.exports.createUser = createUser;
 module.exports.getUserData = getUserData;
 module.exports.updateUser = updateUser;
 module.exports.loginUser = loginUser;
+module.exports.deleteUser = deleteUser;
