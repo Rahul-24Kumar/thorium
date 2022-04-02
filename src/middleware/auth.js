@@ -40,7 +40,7 @@ const authorisation = async function(req, res,next){
         }
         
         if((Date.now() > (decodedToken.exp * 1000))){
-        return res.status(403).send({status : false, message : `session expired, please login again`})
+        return res.status(401).send({status : false, message : `session expired, please login again`})
         }
         
         next()

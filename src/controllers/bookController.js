@@ -86,7 +86,7 @@ const createBook = async function (req, res) {
             return res.status(400).send({status: false, message: 'releasedAt is required'})
         }
 
-        if(!/^\d{4}-\d{2}-\d{2}$/.test(bookBody.releasedAt)) {
+        if(!(/^((?:19|20)[0-9][0-9])-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])/.test(bookBody.releasedAt))) {
             return res.status(400).send({status: false, message: 'Invalid date format'})
         }
           
@@ -304,82 +304,3 @@ module.exports.deleteBookById = deleteBookById
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// const sentnce = data.fullName
-//             let FirstCaptal = convertFirstLetterToUpperCase(sentnce)
-//             function convertFirstLetterToUpperCase(sentnce) {
-//                 var splitStr = sentnce.toLowerCase().split(' ');
-//                 for (var i = 0; i < splitStr.length; i++) {
-//                     splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
-//                 }
-//                 return splitStr.join(' ');
-//             }

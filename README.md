@@ -320,3 +320,54 @@ Refer below sample
   }
 }
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// const sentnce = data.fullName
+//             let FirstCaptal = convertFirstLetterToUpperCase(sentnce)
+//             function convertFirstLetterToUpperCase(sentnce) {
+//                 var splitStr = sentnce.toLowerCase().split(' ');
+//                 for (var i = 0; i < splitStr.length; i++) {
+//                     splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
+//                 }
+//                 return splitStr.join(' ');
+//             }

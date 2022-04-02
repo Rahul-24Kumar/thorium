@@ -56,6 +56,11 @@ const createReview = async function (req, res) {
             return res.status(400).send({ status: false, message: 'please provide valid date in format (YYYY-MM-DD)' })
         }
 
+        if (reviewBody.rating < 1 || reviewBody.rating > 5 ) {
+            res.status(400).send({ status: false, message: 'please provide ratings ( 1 - 5 )' })
+            return
+        }
+
         const reviewData = { bookId, rating, review, reviewedBy, reviewedAt: Date.now() }
 
         const addReview = await reviewModel.create(reviewData)
