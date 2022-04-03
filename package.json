@@ -5,14 +5,14 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon src/index.js"
+    "start": "npx nodemon src/index.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/junaidmallick/BookManagement.git"
   },
   "keywords": [],
-  "author": "junaid",
+  "author": "Rahul",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/junaidmallick/BookManagement/issues"

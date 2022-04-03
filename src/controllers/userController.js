@@ -95,26 +95,26 @@ if (!isValid(address)) {
       return
 }
 
-if (Object.keys(address) == 0) {
-    return res.status(400).send({ status: false, msg: " street||city||pinCode is  required" });
-  }
+// if (Object.keys(address) == 0) {
+//     return res.status(400).send({ status: false, msg: " street||city||pinCode is  required" });
+//   }
 
-if (!isValid(address.street)) {
-    res.status(400).send({ status: false, message: 'street is required' })
-      return
-}
-if (!isValid(address.city)) {
-    res.status(400).send({ status: false, message: 'city is required' })
-      return
-}
-if (!isValid(address.pinCode)) {
-    res.status(400).send({ status: false, message: 'pinCode is required' })
-      return
-}
+// if (!isValid(address.street)) {
+//     res.status(400).send({ status: false, message: 'street is required' })
+//       return
+// }
+// if (!isValid(address.city)) {
+//     res.status(400).send({ status: false, message: 'city is required' })
+//       return
+// }
+// if (!isValid(address.pincode)) {
+//     res.status(400).send({ status: false, message: 'pincode is required' })
+//       return
+// }
 
 //---------------------------------------------------------------------------------------------userCreation
 const newUser = await userModel.create(userBody)
- res.status(201).send({ status:true, data:newUser, msg: "user created successfully"})
+res.status(201).send({ status:true, data:newUser, msg: "user created successfully"})
 
 }catch(err){
     res.status(500).send({status : false , msg : err.message})

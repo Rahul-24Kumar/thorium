@@ -78,9 +78,9 @@ const createBook = async function (req, res) {
             return res.status(400).send({status: false, message: 'subcategory is required'})
         }
         //----------------------------------------------------------------------------------------reviewsValidation
-        if(!isValid(reviews)) {
-            return res.status(400).send({status: false, message: 'reviews is required'})
-        }
+        // if(!isValid(reviews)) {
+        //     return res.status(400).send({status: false, message: 'reviews is required'})
+        // }
         //----------------------------------------------------------------------------------------releasedAtValidation
         if(!isValid(releasedAt)) {
             return res.status(400).send({status: false, message: 'releasedAt is required'})
@@ -205,30 +205,37 @@ const updateBook = async function (req, res) {
 
     const {title, excerpt, ISBN, releasedAt} = req.body
 
-      if (!isValid(title)) {
-        res.status(400).send({ status: false, message: 'please provide title' })
-        return
-      }
+      // if (!isValid(title)) {
+      //   res.status(400).send({ status: false, message: 'please provide title' })
+      //   return
+      // }
 
-      const duplicateTitle = await bookModel.findOne({title: title})
-      if (duplicateTitle) {
-        res.status(400).send({ status: false, message: "This title already in use ,please provide another one" })
-        return
-      }
+      // const duplicateTitle = await bookModel.findOne({title: title})
+      // if (duplicateTitle) {
+      //   res.status(400).send({ status: false, message: "This title already in use ,please provide another one" })
+      //   return
+      // }
     
-      if (!isValid(excerpt)) {
-        res.status(400).send({ status: false, message: 'please provide excerpt' })
-        return
-      }
+      // if (!isValid(excerpt)) {
+      //   res.status(400).send({ status: false, message: 'please provide excerpt' })
+      //   return
+      // }
   
-      if (!isValid(ISBN)) {
-        res.status(400).send({ status: false, message: 'please provide ISBN' })
-        return
-      }
+      // if (!isValid(ISBN)) {
+      //   res.status(400).send({ status: false, message: 'please provide ISBN' })
+      //   return
+      // }
   
-      if (!(/^\+?([1-9]{3})\)?[-. ]?([0-9]{10})$/.test(ISBN))) {
-        return res.status(400).send({ status: false, message: 'please provide valid ISBN' })
-      }
+      // if (!(/^\+?([1-9]{3})\)?[-. ]?([0-9]{10})$/.test(ISBN))) {
+      //   return res.status(400).send({ status: false, message: 'please provide valid ISBN' })
+     // }
+     const duplicateTitle = await bookModel.findOne({ title:title })
+     if (duplicateTitle) {
+       res.status(400).send({ status: false, message: "This title already in use ,please provide another one" })
+       return
+     }
+
+
 
       const duplicateISBN = await bookModel.findOne({ ISBN:ISBN })
       if (duplicateISBN) {
@@ -236,13 +243,13 @@ const updateBook = async function (req, res) {
         return
       }
 
-      if (!isValid(releasedAt)) {
-        res.status(400).send({ status: false, message: 'please provide releasedAt' })
-        return
-      }
-      if (!(/^((?:19|20)[0-9][0-9])-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])/.test(releasedAt))) {
-        return res.status(400).send({ status: false, message: 'please provide valid date in format (YYYY-MM-DD)' })
-      }
+      // if (!isValid(releasedAt)) {
+      //   res.status(400).send({ status: false, message: 'please provide releasedAt' })
+      //   return
+      // }
+      // if (!(/^((?:19|20)[0-9][0-9])-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])/.test(releasedAt))) {
+      //   return res.status(400).send({ status: false, message: 'please provide valid date in format (YYYY-MM-DD)' })
+      // }
 
       const updateData = {title, excerpt, ISBN, releasedAt: moment(releasedAt)}
     
